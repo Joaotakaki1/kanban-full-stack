@@ -1,8 +1,5 @@
-# React + Vite
+# Kanban App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicativo para organizar as tarefas, utilizando a metodologia Kanban, full stack.
+Desenvolvendo com base no vídeo https://www.youtube.com/watch?v=5H0I97Pe9YY&t=2s&ab_channel=DesiCodes, de @Depender-Sethi
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
