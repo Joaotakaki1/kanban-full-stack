@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Container, Stack, TextField, Button, Typography} from '@mui/material'
-import LogoEl from '../../components/utils/LogoEl';
 import LogoImg from '../../assets/logo-kanban.svg';
-
+import LogoEl from '../../components/utils/LogoEl';
+import { auth } from '../../firebase';
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth'
 const initForm = {
     email: '',
     password: '',
@@ -13,6 +14,7 @@ const AuthScreen = () => {
         Para att o valor, basta chamar a funcao setIsLogin */}
     const [isLogin, setIsLogin] =useState(true); {/* Indica se vai fazer login o registrar*/}
     const [form, setForm] =useState(initForm); {/* objeto para guardar email e senha*/}
+    const [loading, setLoading] =useState(false); {/* objeto para dizer se esta loading*/}
     {/* Uma variável que é uma expressão lógica, ou seja, depende do resultado de uma expressao*/}
     const AuthText = isLogin ? "Do not have an account?" : "Already have an account?";
 
@@ -20,7 +22,18 @@ const AuthScreen = () => {
     const handleChange = event => setForm((oldForm) => ({...oldForm,[event.target.name]:event.target.value,
     }));
     const handleAuth = async () => {
-
+        try{
+            setLoading(true);
+            if (isLogin) {
+                await signInWithEmailAndPassword(auth, form.email, form.password)
+            } else {
+                await createUserWithEmailAndPassword(auth, form.email, form.password)
+            }
+        } catch(error){
+            const msg = error.code.split('auth/')[1].split('-').join(' ')
+            console.log(msg);
+            setLoading(false);
+        }
     }
   return (
     <Container 
@@ -39,10 +52,10 @@ const AuthScreen = () => {
         </Stack>
         <Stack spacing={2} >
             {/* Quando houver alguma mudanca nos textfields, a funcao handleChange ira ser rodada*/}
-            <TextField value={form.email} name="email" onChange={handleChange} label='E-mail'/>
-            <TextField value={form.password} name="password" onChange={handleChange} label='Password'/>
+            <TextField value={form.email} name="email" onChange={handleChange} label='Email'/>
+            <TextField value={form.password} name="password" onChange={handleChange} label='Password'  type='password'/>
             {/* A depender do valor da variavel isLogin, o texto no botao muda*/}
-            <Button disabled={!form.email.trim() || !form.password.trim()} onClick={handleAuth}size="large" variant='contained'>{isLogin ? "Login" : "Register"}</Button>
+            <Button disabled={loading || !form.email.trim() || !form.password.trim()} onClick={handleAuth}size="large" variant='contained'>{isLogin ? "Login" : "Register"}</Button>
         </Stack>
         {/* Altera o valor da variavel isLogin para o cointrario dela com o click*/}
         <Typography sx={{cursor: "pointer"}} onClick={() => setIsLogin(o => !o)} mt={2} textAlign='center'>{AuthText}</Typography>
