@@ -1,4 +1,14 @@
 import {createTheme} from '@mui/material'
+
+export const colors = [
+    "#e57373",
+    "#ba68c8",
+    "#7986cb",
+    "#81c784",
+    "#ffd54f",
+    "#ff8a65",
+];
+
 const theme = createTheme({
     palette: {
         mode: "dark",
@@ -12,6 +22,9 @@ const theme = createTheme({
     typography: {
         button: {
             textTransform: "unset",
+            fontWeight: 700,
+        },
+        h6 :{
             fontWeight: 700,
         }
     },

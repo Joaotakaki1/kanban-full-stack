@@ -1,8 +1,12 @@
-
-const index = () => {
+import Topbar from './TopBar';
+import CreateModal from './CreateModal';
+const BoardScreen = () => {
   return (
-    <div>index</div>
+    <>
+      <Topbar />
+      <CreateModal></CreateModal>
+    </>
   )
 }
 
-export default index
+export default BoardScreen
