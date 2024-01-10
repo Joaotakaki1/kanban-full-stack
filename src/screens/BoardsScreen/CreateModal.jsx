@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { Dialog, Stack, Typography, Box, TextField, Button } from '@mui/material'
 import ModalHeader from '../../components/layoult/ModalHeader'
 import { colors } from '../../theme'
-const CreateModal = () => {
+const CreateModal = ({closeModal}) => {
   const [name, setName] = useState("");
   const [color, setColor] = useState(0);
   return (
-    <Dialog open fullWidth maxWidth="xs">  
+    <Dialog open onClose={closeModal} fullWidth maxWidth="xs">  
         <Stack p={2} >
-            <ModalHeader title="Create Board" ></ModalHeader>
+            <ModalHeader onClose={closeModal} title="Create Board" ></ModalHeader>
             <Stack my={5} spacing={3} >
               <TextField value={name} onChange={e => setName(e.target.value)} label="Board Name"/>
               <Stack direction='row' spacing={1.5}>

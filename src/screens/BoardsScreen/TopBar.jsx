@@ -4,7 +4,7 @@ import LogoEl from '../../components/utils/LogoEl';
 import Toolbar from '@mui/material/Toolbar';
 import LogoutIcon from '@mui/icons-material/ExitToApp';
 
-const Topbar = () => {
+const Topbar = ({openModal}) => {
   return (
     <AppBar position='sticky' >
         <Toolbar sx={{
@@ -15,7 +15,7 @@ const Topbar = () => {
                 height:"40px"
             }} src={LogoImg} alt="Kanban App" />
             <Stack direction = "row" spacing={2}>
-                <Button variant="contained" >Create Board</Button>
+                <Button onClick={openModal} variant="contained" >Create Board</Button>
                 {/* Start icon coloca um elemento antes do filho (a string logout) */}
                 <Button startIcon={<LogoutIcon/>} color="inherit">Logout</Button>
             </Stack>
